@@ -17,7 +17,6 @@ namespace FIM
 {
     public partial class Form1 : MetroSet_UI.Forms.MetroSetForm
     {
-
         public Form1()
         {
             InitializeComponent();
@@ -27,11 +26,9 @@ namespace FIM
                 Environment.Exit(0);
             }
         }
-
         private void Form1_Load(object sender, EventArgs e)
         {
         }
-
         private void Browse1_Click(object sender, EventArgs e)
         {
             if (folderBrowserDialog1.ShowDialog() == DialogResult.OK)
@@ -40,7 +37,6 @@ namespace FIM
                 metroSetListBox1.Items.Add(selectedFolderPath);
             }
         }
-
         private void Browse2_Click(object sender, EventArgs e)
         {
             if (folderBrowserDialog2.ShowDialog() == DialogResult.OK)
@@ -49,17 +45,14 @@ namespace FIM
                 metroSetListBox2.Items.Add(selectedFolderPath);
             }
         }
-
         private void Close1_Click(object sender, EventArgs e)
         {
             this.Close();
         }
-
         private void Minimize_Click(object sender, EventArgs e)
         {
             this.WindowState = FormWindowState.Minimized;
         }
-
         private void add1_Click(object sender, EventArgs e)
         {
             string enteredPath = metroSetTextBox1.Text;
@@ -69,7 +62,6 @@ namespace FIM
                 metroSetTextBox1.Text = string.Empty;
             }
         }
-
         private void add2_Click(object sender, EventArgs e)
         {
             string enteredPath = metroSetTextBox2.Text;
@@ -79,122 +71,46 @@ namespace FIM
                 metroSetTextBox2.Text = string.Empty;
             }
         }
-
         private void New_Baseline_Click(object sender, EventArgs e)
         {
-            if (metroSetListBox1.Items.Count != 0)
+            List<string> included = KeepParentDirectories(ConvertItemsToStringList(metroSetListBox1.Items));
+            List<string> excluded = KeepParentDirectories(ConvertItemsToStringList(metroSetListBox2.Items));
+            bool isValidDir = AreValidDirectories(included);
+            bool isValidDir1 = AreValidDirectories(excluded);
+            if (included.Count == 0)
             {
-                if (metroSetListBox2.Items.Count == 0)
-                {
-                    bool isValidDir = AreValidDirectories(ConvertItemsToStringList(metroSetListBox1.Items));
-                    if (isValidDir)
-                    {
-                        try
-                        {
-                            EraseBaselineIfAlreadyExists(ConvertItemsToStringList(metroSetListBox1.Items));
-                            try
-                            {
-                                GenerateHashesForFiles(ConvertItemsToStringList(metroSetListBox1.Items));
-                                MessageBox.Show($"Successfully Created Baseline", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                            }
-                            catch (Exception ex)
-                            {
-                                MessageBox.Show($"Unable to Generate File Hashes: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                            }
-                        }
-                        catch (Exception ex)
-                        {
-                            MessageBox.Show($"Unable to delete baseline.txt: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                        }
-                    }
-                    else
-                    {
-                        string invalidPath = GetInvalidDirectory(ConvertItemsToStringList(metroSetListBox1.Items));
-                        MessageBox.Show($"Invalid directory in included list: {invalidPath}");
-                        return;
-                    }
-                }
-                else if ((metroSetListBox2.Items.Count != 0))
-                {
-
-                    bool isValidDir = AreValidDirectories(ConvertItemsToStringList(metroSetListBox1.Items));
-                    bool isValidDir1 = AreValidDirectories(ConvertItemsToStringList(metroSetListBox2.Items));
-                    if (isValidDir && isValidDir1)
-                    {
-                        List<string> included = ConvertItemsToStringList(metroSetListBox1.Items);
-                        List<string> excluded = ConvertItemsToStringList(metroSetListBox2.Items);
-                        if (included.SequenceEqual(excluded, StringComparer.OrdinalIgnoreCase))
-                        {
-                            MessageBox.Show("Included and Excluded lists are exactly the same.", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                            return;
-                        }
-                        List<string> commonDirs = included.Intersect(excluded, StringComparer.OrdinalIgnoreCase).ToList();
-                        if (commonDirs.Any())
-                        {
-                            List<string> filteredIncluded;
-                            List<string> filteredExcluded;
-                            FilterDirectories(included, excluded, out filteredIncluded, out filteredExcluded);
-                            try
-                            {
-                                EraseBaselineIfAlreadyExists(filteredIncluded);
-                                try
-                                {
-                                    List<string> filteredIncludedSubDirs = FilterSubdirectories(filteredIncluded, filteredExcluded);
-                                    GenerateHashesForFiles(filteredIncludedSubDirs);
-                                    MessageBox.Show($"Successfully Created Baseline", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                                }
-                                catch (Exception ex)
-                                {
-                                    MessageBox.Show($"Unable to Generate File Hashes: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                                }
-                            }
-                            catch (Exception ex)
-                            {
-                                MessageBox.Show($"Unable to delete baseline.txt: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                            }
-                        }
-                        else
-                        {
-                            try
-                            {
-                                EraseBaselineIfAlreadyExists(included);
-                                try
-                                {
-                                    List<string> filteredIncludedSubDirs = FilterSubdirectories(included, excluded);
-                                    GenerateHashesForFiles(filteredIncludedSubDirs);
-                                    MessageBox.Show($"Successfully Created Baseline", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                                }
-                                catch (Exception ex)
-                                {
-                                    MessageBox.Show($"Unable to Generate File Hashes: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                                }
-                            }
-                            catch (Exception ex)
-                            {
-                                MessageBox.Show($"Unable to delete baseline.txt: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                            }
-                        }
-                    }
-                    else
-                    {
-                        List<(string Path, string ListName)> invalidPaths = new List<(string Path, string ListName)>();
-                        if (!isValidDir)
-                        {
-                            invalidPaths.AddRange(GetInvalidDirectories(ConvertItemsToStringList(metroSetListBox1.Items), "Included"));
-                        }
-                        if (!isValidDir1)
-                        {
-                            invalidPaths.AddRange(GetInvalidDirectories(ConvertItemsToStringList(metroSetListBox2.Items), "Excluded"));
-                        }
-                        ShowInvalidPathsMessageBox(invalidPaths);
-                        return;
-                    }
-                }
-            }
-            else
-            {
-                MessageBox.Show($"No directories in the included list.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show($"No directories in the Included list.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
+            }
+            if (!isValidDir || !isValidDir1)
+            {
+                List<(string Path, string ListName)> invalidPaths = new List<(string Path, string ListName)>();
+                if (!isValidDir)
+                {
+                    invalidPaths.AddRange(GetInvalidDirectories(included, "Included"));
+                }
+                if (!isValidDir1)
+                {
+                    invalidPaths.AddRange(GetInvalidDirectories(excluded, "Excluded"));
+                }
+                ShowInvalidPathsMessageBox(invalidPaths);
+                return;
+            }
+            if (excluded.Count == 0)
+            {
+                EraseBaselineIfAlreadyExists(included);
+                GenerateHashesForFiles(included);
+            }
+            else if (excluded.Count != 0)
+            {
+                if (included.SequenceEqual(excluded, StringComparer.OrdinalIgnoreCase))
+                {
+                    MessageBox.Show("Included and Excluded lists are exactly the same.", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
+                List<string> filteredIncludedDirs = KeepParentDirectories(FilterDirectories(included, excluded));
+                EraseBaselineIfAlreadyExists(filteredIncludedDirs);
+                GenerateHashesForFiles(filteredIncludedDirs);
             }
         }
 
@@ -255,6 +171,7 @@ namespace FIM
                         string relativePath = GetRelativePath(directory, filePath);
                         StoreInBaseline(directory, relativePath, fileHash);
                     }
+                    MessageBox.Show($"Successfully Created Baseline for: \n{directory}", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
                 catch (Exception ex)
                 {
@@ -346,24 +263,9 @@ namespace FIM
             MessageBox.Show(errorMessage, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
         }
 
-        private void FilterDirectories(List<string> includedDirectories, List<string> excludedDirectories, out List<string> filteredIncludedDirectories, out List<string> filteredExcludedDirectories)
+        private List<string> FilterDirectories(List<string> included, List<string> excluded)
         {
-            filteredIncludedDirectories = includedDirectories
-                .Where(dir => !excludedDirectories.Any(excludedDir => string.Equals(dir, excludedDir, StringComparison.OrdinalIgnoreCase)))
-                .ToList();
-
-            filteredExcludedDirectories = excludedDirectories
-                .Where(excludedDir => !includedDirectories.Any(dir => string.Equals(dir, excludedDir, StringComparison.OrdinalIgnoreCase)))
-                .ToList();
-        }
-
-        private List<string> FilterSubdirectories(List<string> includedDirectories, List<string> excludedDirectories)
-        {
-            HashSet<string> excludedSet = new HashSet<string>(excludedDirectories, StringComparer.OrdinalIgnoreCase);
-
-            return includedDirectories
-                .Where(dir => !IsExcluded(dir, excludedSet))
-                .ToList();
+            // filter
         }
 
         private bool IsExcluded(string directory, HashSet<string> excludeDirectories)
@@ -381,5 +283,22 @@ namespace FIM
             MessageBox.Show(message, $"{listName} Output", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
+        public List<string> KeepParentDirectories(List<string> directoryPaths)
+        {
+            HashSet<string> resultDirectories = new HashSet<string>(directoryPaths);
+
+            foreach (var directoryPath in directoryPaths)
+            {
+                DirectoryInfo directoryInfo = new DirectoryInfo(directoryPath);
+
+                // Remove subdirectories
+                foreach (var subDirectory in directoryInfo.GetDirectories())
+                {
+                    resultDirectories.Remove(subDirectory.FullName);
+                }
+            }
+
+            return resultDirectories.ToList();
+        }
     }
 }
