@@ -31,6 +31,7 @@
             this.metroSetSetTabPage2 = new MetroSet_UI.Child.MetroSetSetTabPage();
             this.metroSetTabControl1 = new MetroSet_UI.Controls.MetroSetTabControl();
             this.metroSetSetTabPage1 = new MetroSet_UI.Child.MetroSetSetTabPage();
+            this.sub1 = new MetroSet_UI.Controls.MetroSetButton();
             this.add1 = new MetroSet_UI.Controls.MetroSetButton();
             this.metroSetListBox1 = new MetroSet_UI.Controls.MetroSetListBox();
             this.Browse1 = new MetroSet_UI.Controls.MetroSetButton();
@@ -47,6 +48,7 @@
             this.Verify = new MetroSet_UI.Controls.MetroSetButton();
             this.Monitor = new MetroSet_UI.Controls.MetroSetButton();
             this.folderBrowserDialog2 = new System.Windows.Forms.FolderBrowserDialog();
+            this.sub2 = new MetroSet_UI.Controls.MetroSetButton();
             this.metroSetTabControl1.SuspendLayout();
             this.metroSetSetTabPage1.SuspendLayout();
             this.metroSetSetTabPage3.SuspendLayout();
@@ -77,12 +79,12 @@
             this.metroSetTabControl1.BackgroundColor = System.Drawing.Color.Black;
             this.metroSetTabControl1.Controls.Add(this.metroSetSetTabPage1);
             this.metroSetTabControl1.Controls.Add(this.metroSetSetTabPage3);
-            this.metroSetTabControl1.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.metroSetTabControl1.Cursor = System.Windows.Forms.Cursors.Default;
             this.metroSetTabControl1.IsDerivedStyle = true;
             this.metroSetTabControl1.ItemSize = new System.Drawing.Size(100, 38);
             this.metroSetTabControl1.Location = new System.Drawing.Point(15, 98);
             this.metroSetTabControl1.Name = "metroSetTabControl1";
-            this.metroSetTabControl1.SelectedIndex = 0;
+            this.metroSetTabControl1.SelectedIndex = 1;
             this.metroSetTabControl1.SelectedTextColor = System.Drawing.Color.Black;
             this.metroSetTabControl1.Size = new System.Drawing.Size(540, 282);
             this.metroSetTabControl1.SizeMode = System.Windows.Forms.TabSizeMode.Fixed;
@@ -98,6 +100,7 @@
             // metroSetSetTabPage1
             // 
             this.metroSetSetTabPage1.BaseColor = System.Drawing.Color.Black;
+            this.metroSetSetTabPage1.Controls.Add(this.sub1);
             this.metroSetSetTabPage1.Controls.Add(this.add1);
             this.metroSetSetTabPage1.Controls.Add(this.metroSetListBox1);
             this.metroSetSetTabPage1.Controls.Add(this.Browse1);
@@ -117,17 +120,45 @@
             this.metroSetSetTabPage1.ThemeName = "MetroDark";
             this.metroSetSetTabPage1.ToolTipText = null;
             // 
+            // sub1
+            // 
+            this.sub1.DisabledBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(120)))), ((int)(((byte)(65)))), ((int)(((byte)(177)))), ((int)(((byte)(225)))));
+            this.sub1.DisabledBorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(120)))), ((int)(((byte)(65)))), ((int)(((byte)(177)))), ((int)(((byte)(225)))));
+            this.sub1.DisabledForeColor = System.Drawing.Color.Gray;
+            this.sub1.Font = new System.Drawing.Font("Arial Narrow", 24F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.sub1.HoverBorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(95)))), ((int)(((byte)(207)))), ((int)(((byte)(255)))));
+            this.sub1.HoverColor = System.Drawing.Color.FromArgb(((int)(((byte)(95)))), ((int)(((byte)(207)))), ((int)(((byte)(255)))));
+            this.sub1.HoverTextColor = System.Drawing.Color.White;
+            this.sub1.IsDerivedStyle = true;
+            this.sub1.Location = new System.Drawing.Point(384, 25);
+            this.sub1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.sub1.Name = "sub1";
+            this.sub1.NormalBorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(65)))), ((int)(((byte)(177)))), ((int)(((byte)(225)))));
+            this.sub1.NormalColor = System.Drawing.Color.FromArgb(((int)(((byte)(65)))), ((int)(((byte)(177)))), ((int)(((byte)(225)))));
+            this.sub1.NormalTextColor = System.Drawing.Color.Black;
+            this.sub1.PressBorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(35)))), ((int)(((byte)(147)))), ((int)(((byte)(195)))));
+            this.sub1.PressColor = System.Drawing.Color.FromArgb(((int)(((byte)(35)))), ((int)(((byte)(147)))), ((int)(((byte)(195)))));
+            this.sub1.PressTextColor = System.Drawing.Color.White;
+            this.sub1.Size = new System.Drawing.Size(28, 27);
+            this.sub1.Style = MetroSet_UI.Enums.Style.Custom;
+            this.sub1.StyleManager = null;
+            this.sub1.TabIndex = 9;
+            this.sub1.Text = "-";
+            this.sub1.ThemeAuthor = "Narwin";
+            this.sub1.ThemeName = "MetroDark";
+            this.sub1.Click += new System.EventHandler(this.sub1_Click);
+            // 
             // add1
             // 
             this.add1.DisabledBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(120)))), ((int)(((byte)(65)))), ((int)(((byte)(177)))), ((int)(((byte)(225)))));
             this.add1.DisabledBorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(120)))), ((int)(((byte)(65)))), ((int)(((byte)(177)))), ((int)(((byte)(225)))));
             this.add1.DisabledForeColor = System.Drawing.Color.Gray;
-            this.add1.Font = new System.Drawing.Font("Arial Rounded MT Bold", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.add1.Font = new System.Drawing.Font("Arial Narrow", 24F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.add1.HoverBorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(95)))), ((int)(((byte)(207)))), ((int)(((byte)(255)))));
             this.add1.HoverColor = System.Drawing.Color.FromArgb(((int)(((byte)(95)))), ((int)(((byte)(207)))), ((int)(((byte)(255)))));
             this.add1.HoverTextColor = System.Drawing.Color.White;
             this.add1.IsDerivedStyle = true;
-            this.add1.Location = new System.Drawing.Point(418, 25);
+            this.add1.Location = new System.Drawing.Point(350, 25);
             this.add1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.add1.Name = "add1";
             this.add1.NormalBorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(65)))), ((int)(((byte)(177)))), ((int)(((byte)(225)))));
@@ -136,11 +167,11 @@
             this.add1.PressBorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(35)))), ((int)(((byte)(147)))), ((int)(((byte)(195)))));
             this.add1.PressColor = System.Drawing.Color.FromArgb(((int)(((byte)(35)))), ((int)(((byte)(147)))), ((int)(((byte)(195)))));
             this.add1.PressTextColor = System.Drawing.Color.White;
-            this.add1.Size = new System.Drawing.Size(114, 27);
+            this.add1.Size = new System.Drawing.Size(28, 27);
             this.add1.Style = MetroSet_UI.Enums.Style.Custom;
             this.add1.StyleManager = null;
             this.add1.TabIndex = 8;
-            this.add1.Text = "Add";
+            this.add1.Text = "+";
             this.add1.ThemeAuthor = "Narwin";
             this.add1.ThemeName = "MetroDark";
             this.add1.Click += new System.EventHandler(this.add1_Click);
@@ -185,7 +216,7 @@
             this.Browse1.HoverColor = System.Drawing.Color.FromArgb(((int)(((byte)(95)))), ((int)(((byte)(207)))), ((int)(((byte)(255)))));
             this.Browse1.HoverTextColor = System.Drawing.Color.White;
             this.Browse1.IsDerivedStyle = true;
-            this.Browse1.Location = new System.Drawing.Point(298, 25);
+            this.Browse1.Location = new System.Drawing.Point(418, 25);
             this.Browse1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.Browse1.Name = "Browse1";
             this.Browse1.NormalBorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(65)))), ((int)(((byte)(177)))), ((int)(((byte)(225)))));
@@ -194,7 +225,7 @@
             this.Browse1.PressBorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(35)))), ((int)(((byte)(147)))), ((int)(((byte)(195)))));
             this.Browse1.PressColor = System.Drawing.Color.FromArgb(((int)(((byte)(35)))), ((int)(((byte)(147)))), ((int)(((byte)(195)))));
             this.Browse1.PressTextColor = System.Drawing.Color.White;
-            this.Browse1.Size = new System.Drawing.Size(114, 27);
+            this.Browse1.Size = new System.Drawing.Size(118, 27);
             this.Browse1.Style = MetroSet_UI.Enums.Style.Custom;
             this.Browse1.StyleManager = null;
             this.Browse1.TabIndex = 1;
@@ -223,7 +254,7 @@
             this.metroSetTextBox1.Multiline = false;
             this.metroSetTextBox1.Name = "metroSetTextBox1";
             this.metroSetTextBox1.ReadOnly = false;
-            this.metroSetTextBox1.Size = new System.Drawing.Size(290, 27);
+            this.metroSetTextBox1.Size = new System.Drawing.Size(348, 27);
             this.metroSetTextBox1.Style = MetroSet_UI.Enums.Style.Light;
             this.metroSetTextBox1.StyleManager = null;
             this.metroSetTextBox1.TabIndex = 0;
@@ -236,6 +267,7 @@
             // metroSetSetTabPage3
             // 
             this.metroSetSetTabPage3.BaseColor = System.Drawing.Color.Black;
+            this.metroSetSetTabPage3.Controls.Add(this.sub2);
             this.metroSetSetTabPage3.Controls.Add(this.add2);
             this.metroSetSetTabPage3.Controls.Add(this.metroSetListBox2);
             this.metroSetSetTabPage3.Controls.Add(this.Browse2);
@@ -260,12 +292,12 @@
             this.add2.DisabledBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(120)))), ((int)(((byte)(65)))), ((int)(((byte)(177)))), ((int)(((byte)(225)))));
             this.add2.DisabledBorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(120)))), ((int)(((byte)(65)))), ((int)(((byte)(177)))), ((int)(((byte)(225)))));
             this.add2.DisabledForeColor = System.Drawing.Color.Gray;
-            this.add2.Font = new System.Drawing.Font("Arial Rounded MT Bold", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.add2.Font = new System.Drawing.Font("Arial Narrow", 24F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.add2.HoverBorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(95)))), ((int)(((byte)(207)))), ((int)(((byte)(255)))));
             this.add2.HoverColor = System.Drawing.Color.FromArgb(((int)(((byte)(95)))), ((int)(((byte)(207)))), ((int)(((byte)(255)))));
             this.add2.HoverTextColor = System.Drawing.Color.White;
             this.add2.IsDerivedStyle = true;
-            this.add2.Location = new System.Drawing.Point(418, 25);
+            this.add2.Location = new System.Drawing.Point(350, 25);
             this.add2.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.add2.Name = "add2";
             this.add2.NormalBorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(65)))), ((int)(((byte)(177)))), ((int)(((byte)(225)))));
@@ -274,11 +306,11 @@
             this.add2.PressBorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(35)))), ((int)(((byte)(147)))), ((int)(((byte)(195)))));
             this.add2.PressColor = System.Drawing.Color.FromArgb(((int)(((byte)(35)))), ((int)(((byte)(147)))), ((int)(((byte)(195)))));
             this.add2.PressTextColor = System.Drawing.Color.White;
-            this.add2.Size = new System.Drawing.Size(114, 27);
+            this.add2.Size = new System.Drawing.Size(28, 27);
             this.add2.Style = MetroSet_UI.Enums.Style.Custom;
             this.add2.StyleManager = null;
             this.add2.TabIndex = 8;
-            this.add2.Text = "Add";
+            this.add2.Text = "+";
             this.add2.ThemeAuthor = "Narwin";
             this.add2.ThemeName = "MetroDark";
             this.add2.Click += new System.EventHandler(this.add2_Click);
@@ -323,7 +355,7 @@
             this.Browse2.HoverColor = System.Drawing.Color.FromArgb(((int)(((byte)(95)))), ((int)(((byte)(207)))), ((int)(((byte)(255)))));
             this.Browse2.HoverTextColor = System.Drawing.Color.White;
             this.Browse2.IsDerivedStyle = true;
-            this.Browse2.Location = new System.Drawing.Point(298, 25);
+            this.Browse2.Location = new System.Drawing.Point(418, 25);
             this.Browse2.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.Browse2.Name = "Browse2";
             this.Browse2.NormalBorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(65)))), ((int)(((byte)(177)))), ((int)(((byte)(225)))));
@@ -332,7 +364,7 @@
             this.Browse2.PressBorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(35)))), ((int)(((byte)(147)))), ((int)(((byte)(195)))));
             this.Browse2.PressColor = System.Drawing.Color.FromArgb(((int)(((byte)(35)))), ((int)(((byte)(147)))), ((int)(((byte)(195)))));
             this.Browse2.PressTextColor = System.Drawing.Color.White;
-            this.Browse2.Size = new System.Drawing.Size(114, 27);
+            this.Browse2.Size = new System.Drawing.Size(118, 27);
             this.Browse2.Style = MetroSet_UI.Enums.Style.Custom;
             this.Browse2.StyleManager = null;
             this.Browse2.TabIndex = 4;
@@ -361,7 +393,7 @@
             this.metroSetTextBox2.Multiline = false;
             this.metroSetTextBox2.Name = "metroSetTextBox2";
             this.metroSetTextBox2.ReadOnly = false;
-            this.metroSetTextBox2.Size = new System.Drawing.Size(290, 27);
+            this.metroSetTextBox2.Size = new System.Drawing.Size(348, 27);
             this.metroSetTextBox2.Style = MetroSet_UI.Enums.Style.Light;
             this.metroSetTextBox2.StyleManager = null;
             this.metroSetTextBox2.TabIndex = 3;
@@ -513,6 +545,34 @@
             this.Monitor.ThemeName = "MetroDark";
             this.Monitor.Click += new System.EventHandler(this.Monitor_Click);
             // 
+            // sub2
+            // 
+            this.sub2.DisabledBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(120)))), ((int)(((byte)(65)))), ((int)(((byte)(177)))), ((int)(((byte)(225)))));
+            this.sub2.DisabledBorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(120)))), ((int)(((byte)(65)))), ((int)(((byte)(177)))), ((int)(((byte)(225)))));
+            this.sub2.DisabledForeColor = System.Drawing.Color.Gray;
+            this.sub2.Font = new System.Drawing.Font("Arial Narrow", 24F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.sub2.HoverBorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(95)))), ((int)(((byte)(207)))), ((int)(((byte)(255)))));
+            this.sub2.HoverColor = System.Drawing.Color.FromArgb(((int)(((byte)(95)))), ((int)(((byte)(207)))), ((int)(((byte)(255)))));
+            this.sub2.HoverTextColor = System.Drawing.Color.White;
+            this.sub2.IsDerivedStyle = true;
+            this.sub2.Location = new System.Drawing.Point(384, 25);
+            this.sub2.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.sub2.Name = "sub2";
+            this.sub2.NormalBorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(65)))), ((int)(((byte)(177)))), ((int)(((byte)(225)))));
+            this.sub2.NormalColor = System.Drawing.Color.FromArgb(((int)(((byte)(65)))), ((int)(((byte)(177)))), ((int)(((byte)(225)))));
+            this.sub2.NormalTextColor = System.Drawing.Color.Black;
+            this.sub2.PressBorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(35)))), ((int)(((byte)(147)))), ((int)(((byte)(195)))));
+            this.sub2.PressColor = System.Drawing.Color.FromArgb(((int)(((byte)(35)))), ((int)(((byte)(147)))), ((int)(((byte)(195)))));
+            this.sub2.PressTextColor = System.Drawing.Color.White;
+            this.sub2.Size = new System.Drawing.Size(28, 27);
+            this.sub2.Style = MetroSet_UI.Enums.Style.Custom;
+            this.sub2.StyleManager = null;
+            this.sub2.TabIndex = 9;
+            this.sub2.Text = "-";
+            this.sub2.ThemeAuthor = "Narwin";
+            this.sub2.ThemeName = "MetroDark";
+            this.sub2.Click += new System.EventHandler(this.sub2_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(11F, 20F);
@@ -561,6 +621,8 @@
         private System.Windows.Forms.FolderBrowserDialog folderBrowserDialog2;
         private MetroSet_UI.Controls.MetroSetButton add1;
         private MetroSet_UI.Controls.MetroSetButton add2;
+        private MetroSet_UI.Controls.MetroSetButton sub1;
+        private MetroSet_UI.Controls.MetroSetButton sub2;
     }
 }
 

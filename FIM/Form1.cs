@@ -25,6 +25,7 @@ namespace FIM
                 MessageBox.Show("Administrator permissions are required to run this program.", "Permission Denied", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 Environment.Exit(0);
             }
+            this.KeyPreview = true;
         }
         private void Form1_Load(object sender, EventArgs e)
         {
@@ -71,6 +72,7 @@ namespace FIM
                 metroSetTextBox2.Text = string.Empty;
             }
         }
+
         private void New_Baseline_Click(object sender, EventArgs e)
         {
             List<string> included = KeepParentDirectories(ConvertItemsToStringList(metroSetListBox1.Items));
@@ -112,17 +114,14 @@ namespace FIM
                 GenerateHashesForFiles(included, excluded);
             }
         }
-
         private void Verify_Click(object sender, EventArgs e)
         {
-            VerifyAgainstBaseline();
-        }
 
+        }
         private void Monitor_Click(object sender, EventArgs e)
         {
-            MonitorChanges();
-        }
 
+        }
         private void EraseBaselineIfAlreadyExists(List<string> directories)
         {
             foreach (var directory in directories)
@@ -142,22 +141,13 @@ namespace FIM
             }
         }
 
-        private void VerifyAgainstBaseline()
-        {
-        }
-
-        private void MonitorChanges()
-        {
-        }
-
         private bool IsAdmin()
         {
             WindowsIdentity identity = WindowsIdentity.GetCurrent();
             WindowsPrincipal principal = new WindowsPrincipal(identity);
             return principal.IsInRole(WindowsBuiltInRole.Administrator);
         }
-
-                private void GenerateHashesForFilesUnFiltered(List<string> directories)
+        private void GenerateHashesForFilesUnFiltered(List<string> directories)
         {
             foreach (var directory in directories)
             {
@@ -178,7 +168,6 @@ namespace FIM
                 }
             }
         }
-
         private void GenerateHashesForFiles(List<string> directories, List<string> excluded)
         {
             foreach (var directory in directories)
@@ -201,7 +190,6 @@ namespace FIM
                 }
             }
         }
-
         private List<string> ConvertItemsToStringList(MetroSet_UI.Child.MetroSetItemCollection items)
         {
             List<string> directories = new List<string>();
@@ -211,7 +199,6 @@ namespace FIM
             }
             return directories;
         }
-
         private List<string> ConvertItemsToStringList1(IEnumerable<string> items)
         {
             List<string> directories = new List<string>();
@@ -221,12 +208,10 @@ namespace FIM
             }
             return directories;
         }
-
         private bool IsValidDirectory(string directoryPath)
         {
             return !string.IsNullOrWhiteSpace(directoryPath) && Directory.Exists(directoryPath);
         }
-
         private string CalculateSHA512(string filePath)
         {
             using (FileStream fs = new FileStream(filePath, FileMode.Open, FileAccess.Read))
@@ -236,14 +221,12 @@ namespace FIM
                 return BitConverter.ToString(hashBytes).Replace("-", "").ToLower();
             }
         }
-
         private string GetRelativePath(string parentDirectory, string fullPath)
         {
             Uri parentUri = new Uri(parentDirectory + Path.DirectorySeparatorChar);
             Uri fileUri = new Uri(fullPath);
             return Uri.UnescapeDataString(parentUri.MakeRelativeUri(fileUri).ToString());
         }
-
         private void StoreInBaseline(string parentDirectory, string relativePath, string fileHash)
         {
             try
@@ -256,17 +239,14 @@ namespace FIM
                 MessageBox.Show($"Error storing in baseline: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
-
         private bool AreValidDirectories(List<string> directoryPaths)
         {
             return directoryPaths.All(path => !string.IsNullOrWhiteSpace(path) && Directory.Exists(path));
         }
-
         private string GetInvalidDirectory(List<string> directoryPaths)
         {
             return directoryPaths.FirstOrDefault(path => !IsValidDirectory(path));
         }
-
         private List<(string Path, string ListName)> GetInvalidDirectories(List<string> directoryPaths, string listName)
         {
             return directoryPaths
@@ -274,7 +254,6 @@ namespace FIM
                 .Select(path => (path, listName))
                 .ToList();
         }
-
         private void ShowInvalidPathsMessageBox(List<(string Path, string ListName)> invalidPaths)
         {
             string errorMessage = "Invalid directories:\n";
@@ -284,12 +263,10 @@ namespace FIM
             }
             MessageBox.Show(errorMessage, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
         }
-
         private bool IsExcluded(string directory, List<string> excludeDirectories)
         {
             return excludeDirectories.Any(excludeDir => string.Equals(directory, excludeDir, StringComparison.OrdinalIgnoreCase));
         }
-
         private void ShowTestOutputMessageBox(string listName, List<string> items)
         {
             string message = $"{listName}:\n";
@@ -299,23 +276,34 @@ namespace FIM
             }
             MessageBox.Show(message, $"{listName} Output", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
-
         public List<string> KeepParentDirectories(List<string> directoryPaths)
         {
             HashSet<string> resultDirectories = new HashSet<string>(directoryPaths);
-
             foreach (var directoryPath in directoryPaths)
             {
                 DirectoryInfo directoryInfo = new DirectoryInfo(directoryPath);
-
-                // Remove subdirectories
                 foreach (var subDirectory in directoryInfo.GetDirectories())
                 {
                     resultDirectories.Remove(subDirectory.FullName);
                 }
             }
-
             return resultDirectories.ToList();
+        }
+
+        private void sub1_Click(object sender, EventArgs e)
+        {
+            if (metroSetListBox1.SelectedIndex != -1)
+            {
+                metroSetListBox1.Items.RemoveAt(metroSetListBox1.SelectedIndex);
+            }
+        }
+
+        private void sub2_Click(object sender, EventArgs e)
+        {
+            if (metroSetListBox2.SelectedIndex != -1)
+            {
+                metroSetListBox2.Items.RemoveAt(metroSetListBox2.SelectedIndex);
+            }
         }
     }
 }
