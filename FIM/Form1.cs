@@ -99,7 +99,7 @@ namespace FIM
             if (excluded.Count == 0)
             {
                 EraseBaselineIfAlreadyExists(included);
-                GenerateHashesForFiles(included);
+                GenerateHashesForFilesUnFiltered(included);
             }
             else if (excluded.Count != 0)
             {
@@ -108,9 +108,8 @@ namespace FIM
                     MessageBox.Show("Included and Excluded lists are exactly the same.", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     return;
                 }
-                List<string> filteredIncludedDirs = KeepParentDirectories(FilterDirectories(included, excluded));
-                EraseBaselineIfAlreadyExists(filteredIncludedDirs);
-                GenerateHashesForFiles(filteredIncludedDirs);
+                EraseBaselineIfAlreadyExists(included);
+                GenerateHashesForFiles(included, excluded);
             }
         }
 
@@ -158,13 +157,36 @@ namespace FIM
             return principal.IsInRole(WindowsBuiltInRole.Administrator);
         }
 
-        private void GenerateHashesForFiles(List<string> directories)
+                private void GenerateHashesForFilesUnFiltered(List<string> directories)
         {
             foreach (var directory in directories)
             {
                 try
                 {
                     string[] filePaths = Directory.GetFiles(directory, "*", SearchOption.AllDirectories);
+                    foreach (string filePath in filePaths)
+                    {
+                        string fileHash = CalculateSHA512(filePath);
+                        string relativePath = GetRelativePath(directory, filePath);
+                        StoreInBaseline(directory, relativePath, fileHash);
+                    }
+                    MessageBox.Show($"Successfully Created Baseline for: \n{directory}", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show($"Error generating hashes: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+        }
+
+        private void GenerateHashesForFiles(List<string> directories, List<string> excluded)
+        {
+            foreach (var directory in directories)
+            {
+                try
+                {
+                    string[] filePaths = Directory.GetFiles(directory, "*", SearchOption.AllDirectories);
+                    filePaths = filePaths.Where(filePath => !IsExcluded(Path.GetDirectoryName(filePath), excluded)).ToArray();
                     foreach (string filePath in filePaths)
                     {
                         string fileHash = CalculateSHA512(filePath);
@@ -263,12 +285,7 @@ namespace FIM
             MessageBox.Show(errorMessage, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
         }
 
-        private List<string> FilterDirectories(List<string> included, List<string> excluded)
-        {
-            // filter
-        }
-
-        private bool IsExcluded(string directory, HashSet<string> excludeDirectories)
+        private bool IsExcluded(string directory, List<string> excludeDirectories)
         {
             return excludeDirectories.Any(excludeDir => string.Equals(directory, excludeDir, StringComparison.OrdinalIgnoreCase));
         }
