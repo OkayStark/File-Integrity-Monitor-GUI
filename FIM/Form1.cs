@@ -25,11 +25,12 @@ namespace FIM
                 MessageBox.Show("Administrator permissions are required to run this program.", "Permission Denied", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 Environment.Exit(0);
             }
-            this.KeyPreview = true;
         }
+
         private void Form1_Load(object sender, EventArgs e)
         {
         }
+
         private void Browse1_Click(object sender, EventArgs e)
         {
             if (folderBrowserDialog1.ShowDialog() == DialogResult.OK)
@@ -38,6 +39,7 @@ namespace FIM
                 metroSetListBox1.Items.Add(selectedFolderPath);
             }
         }
+
         private void Browse2_Click(object sender, EventArgs e)
         {
             if (folderBrowserDialog2.ShowDialog() == DialogResult.OK)
@@ -46,14 +48,17 @@ namespace FIM
                 metroSetListBox2.Items.Add(selectedFolderPath);
             }
         }
+
         private void Close1_Click(object sender, EventArgs e)
         {
             this.Close();
         }
+
         private void Minimize_Click(object sender, EventArgs e)
         {
             this.WindowState = FormWindowState.Minimized;
         }
+
         private void add1_Click(object sender, EventArgs e)
         {
             string enteredPath = metroSetTextBox1.Text;
@@ -63,6 +68,7 @@ namespace FIM
                 metroSetTextBox1.Text = string.Empty;
             }
         }
+
         private void add2_Click(object sender, EventArgs e)
         {
             string enteredPath = metroSetTextBox2.Text;
@@ -70,6 +76,22 @@ namespace FIM
             {
                 metroSetListBox2.Items.Add(enteredPath);
                 metroSetTextBox2.Text = string.Empty;
+            }
+        }
+
+        private void sub1_Click(object sender, EventArgs e)
+        {
+            if (metroSetListBox1.SelectedIndex != -1)
+            {
+                metroSetListBox1.Items.RemoveAt(metroSetListBox1.SelectedIndex);
+            }
+        }
+
+        private void sub2_Click(object sender, EventArgs e)
+        {
+            if (metroSetListBox2.SelectedIndex != -1)
+            {
+                metroSetListBox2.Items.RemoveAt(metroSetListBox2.SelectedIndex);
             }
         }
 
@@ -114,14 +136,40 @@ namespace FIM
                 GenerateHashesForFiles(included, excluded);
             }
         }
+
         private void Verify_Click(object sender, EventArgs e)
         {
-
+            List<string> included = KeepParentDirectories(ConvertItemsToStringList(metroSetListBox1.Items));
+            List<string> excluded = KeepParentDirectories(ConvertItemsToStringList(metroSetListBox2.Items));
+            bool isValidDir = AreValidDirectories(included);
+            bool isValidDir1 = AreValidDirectories(excluded);
+            if (included.Count == 0)
+            {
+                MessageBox.Show($"No directories in the Included list.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+            if (!isValidDir || !isValidDir1)
+            {
+                List<(string Path, string ListName)> invalidPaths = new List<(string Path, string ListName)>();
+                if (!isValidDir)
+                {
+                    invalidPaths.AddRange(GetInvalidDirectories(included, "Included"));
+                }
+                if (!isValidDir1)
+                {
+                    invalidPaths.AddRange(GetInvalidDirectories(excluded, "Excluded"));
+                }
+                ShowInvalidPathsMessageBox(invalidPaths);
+                return;
+            }
+            VerifyDirectories(included, excluded);
         }
+
         private void Monitor_Click(object sender, EventArgs e)
         {
 
         }
+
         private void EraseBaselineIfAlreadyExists(List<string> directories)
         {
             foreach (var directory in directories)
@@ -141,12 +189,7 @@ namespace FIM
             }
         }
 
-        private bool IsAdmin()
-        {
-            WindowsIdentity identity = WindowsIdentity.GetCurrent();
-            WindowsPrincipal principal = new WindowsPrincipal(identity);
-            return principal.IsInRole(WindowsBuiltInRole.Administrator);
-        }
+
         private void GenerateHashesForFilesUnFiltered(List<string> directories)
         {
             foreach (var directory in directories)
@@ -157,8 +200,7 @@ namespace FIM
                     foreach (string filePath in filePaths)
                     {
                         string fileHash = CalculateSHA512(filePath);
-                        string relativePath = GetRelativePath(directory, filePath);
-                        StoreInBaseline(directory, relativePath, fileHash);
+                        StoreInBaseline(directory, filePath, fileHash);
                     }
                     MessageBox.Show($"Successfully Created Baseline for: \n{directory}", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
@@ -168,6 +210,7 @@ namespace FIM
                 }
             }
         }
+
         private void GenerateHashesForFiles(List<string> directories, List<string> excluded)
         {
             foreach (var directory in directories)
@@ -179,8 +222,7 @@ namespace FIM
                     foreach (string filePath in filePaths)
                     {
                         string fileHash = CalculateSHA512(filePath);
-                        string relativePath = GetRelativePath(directory, filePath);
-                        StoreInBaseline(directory, relativePath, fileHash);
+                        StoreInBaseline(directory, filePath, fileHash);
                     }
                     MessageBox.Show($"Successfully Created Baseline for: \n{directory}", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
@@ -190,6 +232,12 @@ namespace FIM
                 }
             }
         }
+
+        private bool IsExcluded(string directory, List<string> excludeDirectories)
+        {
+            return excludeDirectories.Any(excludeDir => string.Equals(directory, excludeDir, StringComparison.OrdinalIgnoreCase));
+        }
+
         private List<string> ConvertItemsToStringList(MetroSet_UI.Child.MetroSetItemCollection items)
         {
             List<string> directories = new List<string>();
@@ -199,6 +247,7 @@ namespace FIM
             }
             return directories;
         }
+
         private List<string> ConvertItemsToStringList1(IEnumerable<string> items)
         {
             List<string> directories = new List<string>();
@@ -208,10 +257,12 @@ namespace FIM
             }
             return directories;
         }
+
         private bool IsValidDirectory(string directoryPath)
         {
             return !string.IsNullOrWhiteSpace(directoryPath) && Directory.Exists(directoryPath);
         }
+
         private string CalculateSHA512(string filePath)
         {
             using (FileStream fs = new FileStream(filePath, FileMode.Open, FileAccess.Read))
@@ -221,12 +272,14 @@ namespace FIM
                 return BitConverter.ToString(hashBytes).Replace("-", "").ToLower();
             }
         }
+
         private string GetRelativePath(string parentDirectory, string fullPath)
         {
             Uri parentUri = new Uri(parentDirectory + Path.DirectorySeparatorChar);
             Uri fileUri = new Uri(fullPath);
             return Uri.UnescapeDataString(parentUri.MakeRelativeUri(fileUri).ToString());
         }
+
         private void StoreInBaseline(string parentDirectory, string relativePath, string fileHash)
         {
             try
@@ -239,14 +292,17 @@ namespace FIM
                 MessageBox.Show($"Error storing in baseline: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
+
         private bool AreValidDirectories(List<string> directoryPaths)
         {
             return directoryPaths.All(path => !string.IsNullOrWhiteSpace(path) && Directory.Exists(path));
         }
+
         private string GetInvalidDirectory(List<string> directoryPaths)
         {
             return directoryPaths.FirstOrDefault(path => !IsValidDirectory(path));
         }
+
         private List<(string Path, string ListName)> GetInvalidDirectories(List<string> directoryPaths, string listName)
         {
             return directoryPaths
@@ -254,6 +310,7 @@ namespace FIM
                 .Select(path => (path, listName))
                 .ToList();
         }
+
         private void ShowInvalidPathsMessageBox(List<(string Path, string ListName)> invalidPaths)
         {
             string errorMessage = "Invalid directories:\n";
@@ -263,10 +320,7 @@ namespace FIM
             }
             MessageBox.Show(errorMessage, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
         }
-        private bool IsExcluded(string directory, List<string> excludeDirectories)
-        {
-            return excludeDirectories.Any(excludeDir => string.Equals(directory, excludeDir, StringComparison.OrdinalIgnoreCase));
-        }
+
         private void ShowTestOutputMessageBox(string listName, List<string> items)
         {
             string message = $"{listName}:\n";
@@ -276,6 +330,7 @@ namespace FIM
             }
             MessageBox.Show(message, $"{listName} Output", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
+
         public List<string> KeepParentDirectories(List<string> directoryPaths)
         {
             HashSet<string> resultDirectories = new HashSet<string>(directoryPaths);
@@ -290,20 +345,93 @@ namespace FIM
             return resultDirectories.ToList();
         }
 
-        private void sub1_Click(object sender, EventArgs e)
+        private void VerifyDirectories(List<string> included, List<string> excluded)
         {
-            if (metroSetListBox1.SelectedIndex != -1)
+            List<string> modifiedFiles = new List<string>();  // Accumulate modified files
+            foreach (var directory in included)
             {
-                metroSetListBox1.Items.RemoveAt(metroSetListBox1.SelectedIndex);
+                VerifyDirectoryRecursive(directory, excluded, modifiedFiles);
+            }
+            // Display a single report after the verification process
+            if (modifiedFiles.Count > 0)
+            {
+                ShowModifiedFilesReport(modifiedFiles);
+            }
+            else
+            {
+                MessageBox.Show("Verification completed successfully. No files modified.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
         }
 
-        private void sub2_Click(object sender, EventArgs e)
+        private void VerifyDirectoryRecursive(string directory, List<string> excluded, List<string> modifiedFiles)
         {
-            if (metroSetListBox2.SelectedIndex != -1)
+            // Check if the current directory has a baseline file
+            string baselineFilePath = Path.Combine(directory, "baseline.txt");
+            if (File.Exists(baselineFilePath))
             {
-                metroSetListBox2.Items.RemoveAt(metroSetListBox2.SelectedIndex);
+                VerifyBaseline(directory, baselineFilePath, excluded, modifiedFiles);
             }
+            // Check subdirectories recursively
+            try
+            {
+                string[] subDirectories = Directory.GetDirectories(directory);
+                foreach (var subDirectory in subDirectories)
+                {
+                    VerifyDirectoryRecursive(subDirectory, excluded, modifiedFiles);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Error verifying subdirectories: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private void VerifyBaseline(string directory, string baselineFilePath, List<string> excluded, List<string> modifiedFiles)
+        {
+            try
+            {
+                string[] baselineLines = File.ReadAllLines(baselineFilePath);
+                foreach (var baselineLine in baselineLines)
+                {
+                    string[] parts = baselineLine.Split(' ');
+                    if (parts.Length == 2)
+                    {
+                        string fullPath = parts[0]; // Assuming the full path is in the first part
+                        string expectedHash = parts[1];
+                        if (IsExcluded(Path.GetDirectoryName(fullPath), excluded) || !File.Exists(fullPath))
+                        {
+                            // Skip excluded files or files not present in the directory
+                            continue;
+                        }
+                        string actualHash = CalculateSHA512(fullPath);
+                        if (!expectedHash.Equals(actualHash, StringComparison.OrdinalIgnoreCase))
+                        {
+                            modifiedFiles.Add(fullPath);  // Accumulate modified files
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Error verifying baseline: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private void ShowModifiedFilesReport(List<string> modifiedFiles)
+        {
+            StringBuilder report = new StringBuilder("Verification completed with modified files:\n");
+            foreach (var modifiedFile in modifiedFiles)
+            {
+                report.AppendLine(modifiedFile);
+            }
+            MessageBox.Show(report.ToString(), "Verification Result", MessageBoxButtons.OK, MessageBoxIcon.Information);
+        }
+
+        private bool IsAdmin()
+        {
+            WindowsIdentity identity = WindowsIdentity.GetCurrent();
+            WindowsPrincipal principal = new WindowsPrincipal(identity);
+            return principal.IsInRole(WindowsBuiltInRole.Administrator);
         }
     }
 }

@@ -37,6 +37,7 @@
             this.Browse1 = new MetroSet_UI.Controls.MetroSetButton();
             this.metroSetTextBox1 = new MetroSet_UI.Controls.MetroSetTextBox();
             this.metroSetSetTabPage3 = new MetroSet_UI.Child.MetroSetSetTabPage();
+            this.sub2 = new MetroSet_UI.Controls.MetroSetButton();
             this.add2 = new MetroSet_UI.Controls.MetroSetButton();
             this.metroSetListBox2 = new MetroSet_UI.Controls.MetroSetListBox();
             this.Browse2 = new MetroSet_UI.Controls.MetroSetButton();
@@ -48,7 +49,6 @@
             this.Verify = new MetroSet_UI.Controls.MetroSetButton();
             this.Monitor = new MetroSet_UI.Controls.MetroSetButton();
             this.folderBrowserDialog2 = new System.Windows.Forms.FolderBrowserDialog();
-            this.sub2 = new MetroSet_UI.Controls.MetroSetButton();
             this.metroSetTabControl1.SuspendLayout();
             this.metroSetSetTabPage1.SuspendLayout();
             this.metroSetSetTabPage3.SuspendLayout();
@@ -286,6 +286,34 @@
             this.metroSetSetTabPage3.ThemeAuthor = "Narwin";
             this.metroSetSetTabPage3.ThemeName = "MetroDark";
             this.metroSetSetTabPage3.ToolTipText = null;
+            // 
+            // sub2
+            // 
+            this.sub2.DisabledBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(120)))), ((int)(((byte)(65)))), ((int)(((byte)(177)))), ((int)(((byte)(225)))));
+            this.sub2.DisabledBorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(120)))), ((int)(((byte)(65)))), ((int)(((byte)(177)))), ((int)(((byte)(225)))));
+            this.sub2.DisabledForeColor = System.Drawing.Color.Gray;
+            this.sub2.Font = new System.Drawing.Font("Arial Narrow", 24F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.sub2.HoverBorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(95)))), ((int)(((byte)(207)))), ((int)(((byte)(255)))));
+            this.sub2.HoverColor = System.Drawing.Color.FromArgb(((int)(((byte)(95)))), ((int)(((byte)(207)))), ((int)(((byte)(255)))));
+            this.sub2.HoverTextColor = System.Drawing.Color.White;
+            this.sub2.IsDerivedStyle = true;
+            this.sub2.Location = new System.Drawing.Point(384, 25);
+            this.sub2.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.sub2.Name = "sub2";
+            this.sub2.NormalBorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(65)))), ((int)(((byte)(177)))), ((int)(((byte)(225)))));
+            this.sub2.NormalColor = System.Drawing.Color.FromArgb(((int)(((byte)(65)))), ((int)(((byte)(177)))), ((int)(((byte)(225)))));
+            this.sub2.NormalTextColor = System.Drawing.Color.Black;
+            this.sub2.PressBorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(35)))), ((int)(((byte)(147)))), ((int)(((byte)(195)))));
+            this.sub2.PressColor = System.Drawing.Color.FromArgb(((int)(((byte)(35)))), ((int)(((byte)(147)))), ((int)(((byte)(195)))));
+            this.sub2.PressTextColor = System.Drawing.Color.White;
+            this.sub2.Size = new System.Drawing.Size(28, 27);
+            this.sub2.Style = MetroSet_UI.Enums.Style.Custom;
+            this.sub2.StyleManager = null;
+            this.sub2.TabIndex = 9;
+            this.sub2.Text = "-";
+            this.sub2.ThemeAuthor = "Narwin";
+            this.sub2.ThemeName = "MetroDark";
+            this.sub2.Click += new System.EventHandler(this.sub2_Click);
             // 
             // add2
             // 
@@ -544,34 +572,6 @@
             this.Monitor.ThemeAuthor = "Narwin";
             this.Monitor.ThemeName = "MetroDark";
             this.Monitor.Click += new System.EventHandler(this.Monitor_Click);
-            // 
-            // sub2
-            // 
-            this.sub2.DisabledBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(120)))), ((int)(((byte)(65)))), ((int)(((byte)(177)))), ((int)(((byte)(225)))));
-            this.sub2.DisabledBorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(120)))), ((int)(((byte)(65)))), ((int)(((byte)(177)))), ((int)(((byte)(225)))));
-            this.sub2.DisabledForeColor = System.Drawing.Color.Gray;
-            this.sub2.Font = new System.Drawing.Font("Arial Narrow", 24F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.sub2.HoverBorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(95)))), ((int)(((byte)(207)))), ((int)(((byte)(255)))));
-            this.sub2.HoverColor = System.Drawing.Color.FromArgb(((int)(((byte)(95)))), ((int)(((byte)(207)))), ((int)(((byte)(255)))));
-            this.sub2.HoverTextColor = System.Drawing.Color.White;
-            this.sub2.IsDerivedStyle = true;
-            this.sub2.Location = new System.Drawing.Point(384, 25);
-            this.sub2.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.sub2.Name = "sub2";
-            this.sub2.NormalBorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(65)))), ((int)(((byte)(177)))), ((int)(((byte)(225)))));
-            this.sub2.NormalColor = System.Drawing.Color.FromArgb(((int)(((byte)(65)))), ((int)(((byte)(177)))), ((int)(((byte)(225)))));
-            this.sub2.NormalTextColor = System.Drawing.Color.Black;
-            this.sub2.PressBorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(35)))), ((int)(((byte)(147)))), ((int)(((byte)(195)))));
-            this.sub2.PressColor = System.Drawing.Color.FromArgb(((int)(((byte)(35)))), ((int)(((byte)(147)))), ((int)(((byte)(195)))));
-            this.sub2.PressTextColor = System.Drawing.Color.White;
-            this.sub2.Size = new System.Drawing.Size(28, 27);
-            this.sub2.Style = MetroSet_UI.Enums.Style.Custom;
-            this.sub2.StyleManager = null;
-            this.sub2.TabIndex = 9;
-            this.sub2.Text = "-";
-            this.sub2.ThemeAuthor = "Narwin";
-            this.sub2.ThemeName = "MetroDark";
-            this.sub2.Click += new System.EventHandler(this.sub2_Click);
             // 
             // Form1
             // 
