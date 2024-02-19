@@ -84,14 +84,14 @@
             this.metroSetTabControl1.ItemSize = new System.Drawing.Size(100, 38);
             this.metroSetTabControl1.Location = new System.Drawing.Point(15, 98);
             this.metroSetTabControl1.Name = "metroSetTabControl1";
-            this.metroSetTabControl1.SelectedIndex = 1;
+            this.metroSetTabControl1.SelectedIndex = 0;
             this.metroSetTabControl1.SelectedTextColor = System.Drawing.Color.Black;
             this.metroSetTabControl1.Size = new System.Drawing.Size(540, 282);
             this.metroSetTabControl1.SizeMode = System.Windows.Forms.TabSizeMode.Fixed;
             this.metroSetTabControl1.Speed = 100;
             this.metroSetTabControl1.Style = MetroSet_UI.Enums.Style.Custom;
             this.metroSetTabControl1.StyleManager = null;
-            this.metroSetTabControl1.TabIndex = 1;
+            this.metroSetTabControl1.TabIndex = 0;
             this.metroSetTabControl1.ThemeAuthor = "Narwin";
             this.metroSetTabControl1.ThemeName = "MetroDark";
             this.metroSetTabControl1.UnselectedTextColor = System.Drawing.Color.Gray;

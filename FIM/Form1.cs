@@ -26,7 +26,6 @@ namespace FIM
                 Environment.Exit(0);
             }
         }
-
         private void Form1_Load(object sender, EventArgs e)
         {
         }
@@ -165,9 +164,39 @@ namespace FIM
             VerifyDirectories(included, excluded);
         }
 
+        private FileSystemWatcher fileSystemWatcher;
         private void Monitor_Click(object sender, EventArgs e)
         {
+            List<string> included = KeepParentDirectories(ConvertItemsToStringList(metroSetListBox1.Items));
+            List<string> excluded = KeepParentDirectories(ConvertItemsToStringList(metroSetListBox2.Items));
+            bool isValidDir = AreValidDirectories(included);
+            bool isValidDir1 = AreValidDirectories(excluded);
 
+            if (included.Count == 0)
+            {
+                MessageBox.Show($"No directories in the Included list.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+            if (!isValidDir || !isValidDir1)
+            {
+                List<(string Path, string ListName)> invalidPaths = new List<(string Path, string ListName)>();
+                if (!isValidDir)
+                {
+                    invalidPaths.AddRange(GetInvalidDirectories(included, "Included"));
+                }
+                if (!isValidDir1)
+                {
+                    invalidPaths.AddRange(GetInvalidDirectories(excluded, "Excluded"));
+                }
+                ShowInvalidPathsMessageBox(invalidPaths);
+                return;
+            }
+
+            // Stop existing monitoring, if any
+            StopMonitoring();
+
+            // Start monitoring
+            StartMonitoring(included, excluded);
         }
 
         private void EraseBaselineIfAlreadyExists(List<string> directories)
@@ -433,5 +462,61 @@ namespace FIM
             WindowsPrincipal principal = new WindowsPrincipal(identity);
             return principal.IsInRole(WindowsBuiltInRole.Administrator);
         }
+        private Form2 monitoringForm;
+        private void StartMonitoring(List<string> included, List<string> excluded)
+        {
+            fileSystemWatcher = new FileSystemWatcher();
+
+            // Set the directories to monitor
+            foreach (var directory in included)
+            {
+                fileSystemWatcher.Path = directory;
+            }
+
+            // Add event handlers
+            fileSystemWatcher.Created += FileSystemWatcher_Event;
+            fileSystemWatcher.Deleted += FileSystemWatcher_Event;
+            fileSystemWatcher.Changed += FileSystemWatcher_Event;
+            fileSystemWatcher.Renamed += FileSystemWatcher_Event;
+
+            // Enable events
+            fileSystemWatcher.EnableRaisingEvents = true;
+
+            monitoringForm = new Form2();
+            monitoringForm.Show();
+            monitoringForm.dataGridView1.Rows.Clear();
+
+            MessageBox.Show("Monitoring started. The application will continuously verify files.", "Monitoring", MessageBoxButtons.OK, MessageBoxIcon.Information);
+        }
+
+        private void FileSystemWatcher_Event(object sender, FileSystemEventArgs e)
+        {
+            // React to file system events, e.g., verify the modified file
+            string modifiedFilePath = e.FullPath;
+            string parentDirectory = Path.GetDirectoryName(modifiedFilePath);
+
+            // Check if the parent directory is excluded from monitoring
+            List<string> excluded = KeepParentDirectories(ConvertItemsToStringList(metroSetListBox2.Items));
+            if (!IsExcluded(parentDirectory, excluded))
+            {
+                // Verify the modified file against the baseline
+                VerifyBaseline(parentDirectory, Path.Combine(parentDirectory, "baseline.txt"), excluded, new List<string>());
+
+                // Update the DataGridView on Form2
+                monitoringForm.UpdateDataGridView(e.ChangeType, e.Name, DateTime.Now.ToString());
+            }
+        }
+
+        private void StopMonitoring()
+        {
+            if (fileSystemWatcher != null)
+            {
+                fileSystemWatcher.EnableRaisingEvents = false;
+                fileSystemWatcher.Dispose();
+                fileSystemWatcher = null;
+                MessageBox.Show("Monitoring stopped.", "Monitoring", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+        }
+
     }
 }
