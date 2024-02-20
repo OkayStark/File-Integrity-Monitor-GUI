@@ -1,13 +1,3 @@
-C:\Users\Saurav\source\repos\FIM\FIM\bin\Debug\FIM.exe.config
-C:\Users\Saurav\source\repos\FIM\FIM\bin\Debug\FIM.exe
-C:\Users\Saurav\source\repos\FIM\FIM\bin\Debug\FIM.pdb
-C:\Users\Saurav\source\repos\FIM\FIM\bin\Debug\MetroSet UI.dll
-C:\Users\Saurav\source\repos\FIM\FIM\obj\Debug\FIM.Form1.resources
-C:\Users\Saurav\source\repos\FIM\FIM\obj\Debug\FIM.Properties.Resources.resources
-C:\Users\Saurav\source\repos\FIM\FIM\obj\Debug\FIM.csproj.GenerateResource.cache
-C:\Users\Saurav\source\repos\FIM\FIM\obj\Debug\FIM.csproj.CoreCompileInputs.cache
-C:\Users\Saurav\source\repos\FIM\FIM\obj\Debug\FIM.exe
-C:\Users\Saurav\source\repos\FIM\FIM\obj\Debug\FIM.pdb
 C:\Users\Saurav\Desktop\FIM\FIM\bin\Debug\FIM.exe.config
 C:\Users\Saurav\Desktop\FIM\FIM\bin\Debug\FIM.exe
 C:\Users\Saurav\Desktop\FIM\FIM\bin\Debug\FIM.pdb
@@ -20,5 +10,15 @@ C:\Users\Saurav\Desktop\FIM\FIM\obj\Debug\FIM.csproj.CoreCompileInputs.cache
 C:\Users\Saurav\Desktop\FIM\FIM\obj\Debug\FIM.csproj.CopyComplete
 C:\Users\Saurav\Desktop\FIM\FIM\obj\Debug\FIM.exe
 C:\Users\Saurav\Desktop\FIM\FIM\obj\Debug\FIM.pdb
+C:\Users\Saurav\source\repos\FIM\FIM\bin\Debug\FIM.exe.config
+C:\Users\Saurav\source\repos\FIM\FIM\bin\Debug\FIM.exe
+C:\Users\Saurav\source\repos\FIM\FIM\bin\Debug\FIM.pdb
+C:\Users\Saurav\source\repos\FIM\FIM\bin\Debug\MetroSet UI.dll
+C:\Users\Saurav\source\repos\FIM\FIM\obj\Debug\FIM.Form1.resources
 C:\Users\Saurav\source\repos\FIM\FIM\obj\Debug\FIM.Form2.resources
+C:\Users\Saurav\source\repos\FIM\FIM\obj\Debug\FIM.Properties.Resources.resources
+C:\Users\Saurav\source\repos\FIM\FIM\obj\Debug\FIM.csproj.GenerateResource.cache
+C:\Users\Saurav\source\repos\FIM\FIM\obj\Debug\FIM.csproj.CoreCompileInputs.cache
+C:\Users\Saurav\source\repos\FIM\FIM\obj\Debug\FIM.exe
+C:\Users\Saurav\source\repos\FIM\FIM\obj\Debug\FIM.pdb
 C:\Users\Saurav\source\repos\FIM\FIM\obj\Debug\FIM.csproj.AssemblyReference.cache

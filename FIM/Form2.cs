@@ -33,7 +33,7 @@ namespace FIM
             }
 
             // Update your DataGridView here
-            dataGridView1.Rows.Add(changeType, fileName, timestamp);
+            dataGridView1.Rows.Add(fileName, changeType, timestamp);
         }
 
         private void Close1_Click(object sender, EventArgs e)
@@ -55,11 +55,10 @@ namespace FIM
                 fileSystemWatcher.EnableRaisingEvents = false;
                 fileSystemWatcher.Dispose();
                 fileSystemWatcher = null;
-                MessageBox.Show("Monitoring stopped.", "Monitoring", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
         }
 
-        private void metroSetButton1_Click(object sender, EventArgs e)
+        private void Stop_Click(object sender, EventArgs e)
         {
             StopMonitoring();
             this.Close();

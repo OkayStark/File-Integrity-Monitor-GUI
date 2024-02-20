@@ -501,7 +501,7 @@ namespace FIM
                 VerifyBaseline(parentDirectory, Path.Combine(parentDirectory, "baseline.txt"), excluded, new List<string>());
 
                 // Update the DataGridView on Form2
-                monitoringForm.UpdateDataGridView(e.ChangeType, e.Name, DateTime.Now.ToString());
+                monitoringForm.UpdateDataGridView(e.ChangeType, modifiedFilePath, DateTime.Now.ToString());
             }
         }
 
@@ -512,9 +512,7 @@ namespace FIM
                 fileSystemWatcher.EnableRaisingEvents = false;
                 fileSystemWatcher.Dispose();
                 fileSystemWatcher = null;
-                MessageBox.Show("Monitoring stopped.", "Monitoring", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
         }
-
     }
 }
