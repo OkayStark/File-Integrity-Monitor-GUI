@@ -18,7 +18,6 @@ namespace FIM
         public Form2()
         {
             InitializeComponent();
-            InitializeDataGridView();
         }
 
         private void Form2_Load(object sender, EventArgs e)
@@ -37,5 +36,33 @@ namespace FIM
             dataGridView1.Rows.Add(changeType, fileName, timestamp);
         }
 
+        private void Close1_Click(object sender, EventArgs e)
+        {
+            StopMonitoring();
+            this.Close();
+        }
+
+        private void Minimize_Click(object sender, EventArgs e)
+        {
+            this.WindowState = FormWindowState.Minimized;
+        }
+
+        private FileSystemWatcher fileSystemWatcher;
+        private void StopMonitoring()
+        {
+            if (fileSystemWatcher != null)
+            {
+                fileSystemWatcher.EnableRaisingEvents = false;
+                fileSystemWatcher.Dispose();
+                fileSystemWatcher = null;
+                MessageBox.Show("Monitoring stopped.", "Monitoring", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+        }
+
+        private void metroSetButton1_Click(object sender, EventArgs e)
+        {
+            StopMonitoring();
+            this.Close();
+        }
     }
 }

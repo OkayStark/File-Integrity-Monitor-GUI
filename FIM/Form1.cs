@@ -485,8 +485,6 @@ namespace FIM
             monitoringForm = new Form2();
             monitoringForm.Show();
             monitoringForm.dataGridView1.Rows.Clear();
-
-            MessageBox.Show("Monitoring started. The application will continuously verify files.", "Monitoring", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
         private void FileSystemWatcher_Event(object sender, FileSystemEventArgs e)

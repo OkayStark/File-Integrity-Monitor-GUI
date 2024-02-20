@@ -21,5 +21,4 @@ C:\Users\Saurav\Desktop\FIM\FIM\obj\Debug\FIM.csproj.CopyComplete
 C:\Users\Saurav\Desktop\FIM\FIM\obj\Debug\FIM.exe
 C:\Users\Saurav\Desktop\FIM\FIM\obj\Debug\FIM.pdb
 C:\Users\Saurav\source\repos\FIM\FIM\obj\Debug\FIM.Form2.resources
-C:\Users\Saurav\source\repos\FIM\FIM\obj\Debug\FIM.csproj.CopyComplete
 C:\Users\Saurav\source\repos\FIM\FIM\obj\Debug\FIM.csproj.AssemblyReference.cache
