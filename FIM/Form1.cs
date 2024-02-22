@@ -98,13 +98,13 @@ namespace FIM
         {
             List<string> included = KeepParentDirectories(ConvertItemsToStringList(metroSetListBox1.Items));
             List<string> excluded = KeepParentDirectories(ConvertItemsToStringList(metroSetListBox2.Items));
-            bool isValidDir = AreValidDirectories(included);
-            bool isValidDir1 = AreValidDirectories(excluded);
             if (included.Count == 0)
             {
                 MessageBox.Show($"No directories in the Included list.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
+            bool isValidDir = AreValidDirectories(included);
+            bool isValidDir1 = AreValidDirectories(excluded);
             if (!isValidDir || !isValidDir1)
             {
                 List<(string Path, string ListName)> invalidPaths = new List<(string Path, string ListName)>();
@@ -140,13 +140,13 @@ namespace FIM
         {
             List<string> included = KeepParentDirectories(ConvertItemsToStringList(metroSetListBox1.Items));
             List<string> excluded = KeepParentDirectories(ConvertItemsToStringList(metroSetListBox2.Items));
-            bool isValidDir = AreValidDirectories(included);
-            bool isValidDir1 = AreValidDirectories(excluded);
             if (included.Count == 0)
             {
                 MessageBox.Show($"No directories in the Included list.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
+            bool isValidDir = AreValidDirectories(included);
+            bool isValidDir1 = AreValidDirectories(excluded);
             if (!isValidDir || !isValidDir1)
             {
                 List<(string Path, string ListName)> invalidPaths = new List<(string Path, string ListName)>();
@@ -169,14 +169,13 @@ namespace FIM
         {
             List<string> included = KeepParentDirectories(ConvertItemsToStringList(metroSetListBox1.Items));
             List<string> excluded = KeepParentDirectories(ConvertItemsToStringList(metroSetListBox2.Items));
-            bool isValidDir = AreValidDirectories(included);
-            bool isValidDir1 = AreValidDirectories(excluded);
-
             if (included.Count == 0)
             {
                 MessageBox.Show($"No directories in the Included list.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
+            bool isValidDir = AreValidDirectories(included);
+            bool isValidDir1 = AreValidDirectories(excluded);
             if (!isValidDir || !isValidDir1)
             {
                 List<(string Path, string ListName)> invalidPaths = new List<(string Path, string ListName)>();
@@ -512,6 +511,14 @@ namespace FIM
                 fileSystemWatcher.EnableRaisingEvents = false;
                 fileSystemWatcher.Dispose();
                 fileSystemWatcher = null;
+            }
+        }
+
+        private void AddTextToList(string enteredText, MetroSet_UI.Controls.MetroSetListBox listBox)
+        {
+            if (!string.IsNullOrWhiteSpace(enteredText))
+            {
+                listBox.Items.Add(enteredText);
             }
         }
     }

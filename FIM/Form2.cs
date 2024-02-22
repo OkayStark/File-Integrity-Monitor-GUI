@@ -33,7 +33,7 @@ namespace FIM
             }
 
             // Update your DataGridView here
-            dataGridView1.Rows.Add(fileName, changeType, timestamp);
+            dataGridView1.Rows.Add(fileName, timestamp, changeType);
         }
 
         private void Close1_Click(object sender, EventArgs e)
