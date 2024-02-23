@@ -33,4 +33,4 @@ Follow these instructions to get the project up and running on your local machin
 
 ## Screenshots
 
-![Screenshot 1](https://github.com/OkayStark/File-Integrity-Monitor-GUI/assets/66514398/4ef1b4e3-af31-4c76-b8f7-6ca9d093a9b4)
+![Screenshot 1](https://github.com/OkayStark/File-Integrity-Monitor-GUI/assets/66514398/03d1438c-878d-433d-a938-9448d532d236)
