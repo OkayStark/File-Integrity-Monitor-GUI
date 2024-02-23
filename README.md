@@ -3,7 +3,7 @@
 [![License](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
 [![GitHub Issues](https://img.shields.io/github/issues/OkayStark/File-Integrity-Monitor-GUI)](https://github.com/OkayStark/File-Integrity-Monitor-GUI/issues)
 
-A Powerful File Integrity Monitor with a sleek GUI! 🚀 Safeguard your data with real-time verification and monitoring. 🛡️
+A Powerful File Integrity Monitor with a sleek GUI! 🚀 Safeguard your data with real-time verification and monitoring.
 
 ![App Logo](https://github.com/OkayStark/File-Integrity-Monitor-GUI/assets/66514398/673fb2e3-bc06-434e-823b-a259ace134e9)
 
