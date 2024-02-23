@@ -1,7 +1,7 @@
 # File Integrity Monitor with GUI
 
 [![License](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
-[![GitHub Issues](https://img.shields.io/github/issues/yourusername/your-repository)](https://github.com/yourusername/your-repository/issues)
+[![GitHub Issues](https://img.shields.io/github/issues/OkayStark/File-Integrity-Monitor-GUI)](https://github.com/OkayStark/File-Integrity-Monitor-GUI/issues)
 
 Excited to introduce my latest project: a powerful File Integrity Monitor with a sleek GUI! 🚀 Safeguard your data with real-time verification and monitoring. 🛡️
 
