@@ -32,3 +32,5 @@ A Powerful File Integrity Monitor with a sleek GUI! 🚀 Safeguard your data wit
 Follow these instructions to get the project up and running on your local machine for development and testing purposes.
 
 ## Screenshots
+
+![Screenshot 1](https://github.com/OkayStark/File-Integrity-Monitor-GUI/assets/66514398/4ef1b4e3-af31-4c76-b8f7-6ca9d093a9b4)
