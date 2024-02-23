@@ -5,7 +5,8 @@
 
 Excited to introduce my latest project: a powerful File Integrity Monitor with a sleek GUI! 🚀 Safeguard your data with real-time verification and monitoring. 🛡️
 
-![App Logo](/path/to/your/logo.png)
+![App Logo](![FIM Logo](https://github.com/OkayStark/File-Integrity-Monitor-GUI/assets/66514398/2cd86db3-2779-4150-ae9b-01def92eb6ab)
+)
 
 ## Features
 
