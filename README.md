@@ -29,7 +29,7 @@ A Powerful File Integrity Monitor with a sleek GUI! 🚀 Safeguard your data wit
 
 ## Getting Started
 
-Follow these instructions to get the project up and running on your local machine for development and testing purposes.
+Just Install Using the exe or .msi installer provided in the release section.
 
 ## Screenshots
 
