@@ -31,6 +31,10 @@ A Powerful File Integrity Monitor with a sleek GUI! 🚀 Safeguard your data wit
 
 Just Install Using the exe or .msi installer provided in the release section.
 
+## Usage
+
+https://github.com/OkayStark/File-Integrity-Monitor-GUI/assets/66514398/0b0253e6-eba2-43d8-a6ec-b052732a29c0
+
 ## Screenshots
 
 ![Screenshot 1](https://github.com/OkayStark/File-Integrity-Monitor-GUI/assets/66514398/03d1438c-878d-433d-a938-9448d532d236)
