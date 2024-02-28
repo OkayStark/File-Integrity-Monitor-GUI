@@ -5,7 +5,9 @@
 
 A Powerful File Integrity Monitor with a sleek GUI! 🚀 Safeguard your data with real-time verification and monitoring.
 
-![App Logo](https://github.com/OkayStark/File-Integrity-Monitor-GUI/assets/66514398/673fb2e3-bc06-434e-823b-a259ace134e9)
+<p align="center">
+  <img src="https://github.com/OkayStark/File-Integrity-Monitor-GUI/assets/66514398/673fb2e3-bc06-434e-823b-a259ace134e9" alt="App Logo">
+</p>
 
 ## Features
 
